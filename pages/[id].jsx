@@ -1,13 +1,24 @@
-import { Box, Image, Text } from "@chakra-ui/react";
-import React from "react";
+import { Box, Image, Link, Text } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import home from "../public/home.svg";
+import { useRouter } from "next/router";
+import { getBlogId } from "../helper/helper";
 
-export const BlogPost = ({currentBlog}) => {
+export default function BlogPost() {
+  const [currentBlog,setCurrentBlog]= useState({})
+  const router = useRouter();
   
-console.log()
+  useEffect(()=>{
+    getBlogId(router.query.id).then((res)=>{
+      setCurrentBlog(res)
+    })
+   
+  },[router.query.id])
+
   return (
     <Box display={"flex"} w={"90%"} m={"auto"} mt={"30px"}>
       <Box position={"absolute"} top={"30%"}>
+        <Link href="/">
         <Box
           width={"80px"}
           height={"70px"}
@@ -21,12 +32,10 @@ console.log()
           <Image
             w={"80px"}
             h={"52px"}
-            src={home}
-            onClick={() => {
-              navigate("/");
-            }}
+            src={home.src}
           />
         </Box>
+        </Link>
       </Box>
       <Box w={"78.7%"} border={"1px solid"} m={"auto"}>
         <Box
@@ -65,9 +74,14 @@ console.log()
           >
             Summary: {"  "} {currentBlog.summary}
           </Text>
-          <Text>Posted Date: {"  "}{currentBlog.date}</Text>
+          <Text>
+            Posted Date: {"  "}
+            {currentBlog.date}
+          </Text>
         </Box>
       </Box>
     </Box>
   );
-};
+}
+
+

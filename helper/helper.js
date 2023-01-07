@@ -7,3 +7,13 @@ export const postBlog = async(body) => {
 
     alert("block added..!")
 }
+
+
+
+
+
+
+export const getBlogId = async(id) => {
+    const res = await fetch(`http://localhost:3000/api/getblogbyid/${id}`).then((x) => x.json())
+    return res
+}

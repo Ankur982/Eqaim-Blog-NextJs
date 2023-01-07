@@ -3,7 +3,7 @@ import React from "react";
 
 export const BlogTitleCard = ({ blog }) => {
   return (
-    <Link href={`/blogPost/${blog._id}`}>
+    <Link href={`/${blog._id}`}>
     <Box
       width={"300px"}
       height={"180px"}
