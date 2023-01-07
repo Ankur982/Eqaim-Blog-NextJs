@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Box, Image, Link, SimpleGrid } from "@chakra-ui/react";
 import { BlogTitleCard } from "../components/BlogTitleCard";
 import createBlog from "../public/createBlog.svg";
 
 
 export default function Home({ res }) {
-
+console.log(res)
   return (
     <Box m="auto" position={"relative"}>
       <SimpleGrid columns={[1, 2, 3]} w="90%" m="auto">
@@ -39,10 +39,7 @@ export default function Home({ res }) {
 
 
 export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/getblogs").then((x) => x.json())
-
-
-  console.log(res)
+  const res = await fetch("https://eqaim-blog-next-js.vercel.app/api/getblogs").then((x) => x.json())
   return {
     props: { res }
   }
